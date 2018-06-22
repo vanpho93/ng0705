@@ -4,7 +4,9 @@ import { Component } from '@angular/core';
     selector: 'app-word',
     template: `
         <h4>Word component</h4>
-        <p>Value = {{ value }}</p>
+        <h1 class="{{ className }}">
+            Value = {{ value }}
+        </h1>
         <button class="btn btn-success" (click)="increase();">
             increase
         </button>
@@ -19,8 +21,10 @@ import { Component } from '@angular/core';
 
 export class WordComponent {
     value = 1;
-
     increase() { this.value++; }
     decrease() { this.value--; }
     reset() { this.value = 1; }
+    get className() {
+        return this.value % 2 === 0 ? 'text-primary' : 'text-danger';
+    }
 }
