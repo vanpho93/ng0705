@@ -4,6 +4,20 @@ import { Component } from '@angular/core';
   selector: 'app-words',
   template: `
     <h4>Words Component</h4>
+    <div class="word form-group" style="width: 250px">
+      <input placeholder="English" class="form-control"/>
+      <br />
+      <input placeholder="Vietnamese" class="form-control"/>
+      <br />
+      <div class="btn-container">
+          <button class="btn btn-success">
+              Add word
+          </button>
+          <button class="btn btn-danger">
+              Cancel
+          </button>
+      </div>
+    </div>
     <div class="word" *ngFor="let wordInfo of words">
       <div class="word-container">
         <h3 class="text-success">{{ wordInfo.en }}</h3>
