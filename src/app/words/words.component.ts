@@ -5,12 +5,12 @@ import { Component } from '@angular/core';
   template: `
     <h4>Words Component</h4>
     <div class="word form-group" style="width: 250px">
-      <input placeholder="English" class="form-control"/>
+      <input placeholder="English" class="form-control" [(ngModel)]="txtEn" />
       <br />
-      <input placeholder="Vietnamese" class="form-control"/>
+      <input placeholder="Vietnamese" class="form-control" [(ngModel)]="txtVn" />
       <br />
       <div class="btn-container">
-          <button class="btn btn-success">
+          <button class="btn btn-success" (click)="addWord();">
               Add word
           </button>
           <button class="btn btn-danger">
@@ -39,12 +39,26 @@ import { Component } from '@angular/core';
 })
 
 export class WordsComponent {
+  txtVn = '';
+  txtEn = '';
   words: Word[] = [
     { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true },
     { _id: 'b', en: 'Two', vn: 'Hai', isMemorized: false },
     { _id: 'c', en: 'Three', vn: 'Ba', isMemorized: false },
     { _id: 'd', en: 'Four', vn: 'Bon', isMemorized: true },
   ];
+
+  addWord() {
+    const word: Word = {
+      _id: Date.now() + '',
+      en: this.txtEn,
+      vn: this.txtVn,
+      isMemorized: false
+    };
+    this.words.unshift(word);
+    this.txtEn = '';
+    this.txtVn = '';
+  }
 
   removeWord(_id: string) {
     const index = this.words.findIndex(w => w._id === _id);
