@@ -18,6 +18,11 @@ import { Component } from '@angular/core';
           </button>
       </div>
     </div>
+    <select class="form-control" style="width: 250px" [(ngModel)]="filterMode">
+      <option value="SHOW_ALL">SHOW ALL</option>
+      <option value="SHOW_MEMORIZED">SHOW MEMORIZED</option>
+      <option value="SHOW_FORGOT">SHOW FORGOT</option>
+    </select>
     <div class="word" *ngFor="let wordInfo of words">
       <div class="word-container">
         <h3 class="text-success">{{ wordInfo.en }}</h3>
@@ -41,6 +46,7 @@ import { Component } from '@angular/core';
 export class WordsComponent {
   txtVn = '';
   txtEn = '';
+  filterMode = 'SHOW_ALL';
   words: Word[] = [
     { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true },
     { _id: 'b', en: 'Two', vn: 'Hai', isMemorized: false },
