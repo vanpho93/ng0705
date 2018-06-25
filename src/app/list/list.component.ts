@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-list',
   template: `
     <h4>List Component</h4>
-    <button class="btn btn-success" *ngIf="!shouldShowInput">
+    <button class="btn btn-success" *ngIf="!shouldShowInput" (click)="toggleInput();">
       Add email
     </button>
     <input
@@ -30,8 +30,13 @@ export class ListComponent {
     'tuan@gmail.com',
   ];
 
+  toggleInput() {
+    this.shouldShowInput = !this.shouldShowInput;
+  }
+
   addEmail() {
     this.emails.push(this.txtEmail);
     this.txtEmail = '';
+    this.shouldShowInput = !this.shouldShowInput;
   }
 }
