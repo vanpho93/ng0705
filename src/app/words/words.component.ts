@@ -10,13 +10,13 @@ import { Component } from '@angular/core';
         <h3 class="text-danger">{{ wordInfo.isMemorized ? '******' : wordInfo.vn }}</h3>
       </div>
       <div class="btn-container">
-        <button class="btn btn-success" *ngIf="wordInfo.isMemorized">
+        <button class="btn btn-success" *ngIf="wordInfo.isMemorized" (click)="toggleWord(wordInfo._id)">
           Forgot
         </button>
-        <button class="btn btn-danger" *ngIf="!wordInfo.isMemorized">
+        <button class="btn btn-danger" *ngIf="!wordInfo.isMemorized" (click)="toggleWord(wordInfo._id)">
           Memorized
         </button>
-        <button class="btn btn-warning">
+        <button class="btn btn-warning" (click)="removeWord(wordInfo._id);">
           Remove
         </button>
       </div>
@@ -31,6 +31,16 @@ export class WordsComponent {
     { _id: 'c', en: 'Three', vn: 'Ba', isMemorized: false },
     { _id: 'd', en: 'Four', vn: 'Bon', isMemorized: true },
   ];
+
+  removeWord(_id: string) {
+    const index = this.words.findIndex(w => w._id === _id);
+    this.words.splice(index, 1);
+  }
+
+  toggleWord(_id: string) {
+    const word = this.words.find(w => w._id === _id);
+    word.isMemorized = !word.isMemorized;
+  }
 }
 
 interface Word {
