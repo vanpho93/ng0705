@@ -5,10 +5,14 @@ import { Word } from './types';
     selector: 'app-parent',
     template: `
         <h4>Parent component</h4>
-        <app-child [wordInfo]="word"></app-child>
+        <app-child *ngFor="let x of words" [wordInfo]="x"></app-child>
     `
 })
 
 export class ParentComponent {
-    word: Word = { en: 'Six', vn: 'sau' };
+    words: Word[] = [
+        { en: 'Six', vn: 'sau' },
+        { en: 'Five', vn: 'nam' },
+        { en: 'Four', vn: 'bon' },
+    ];
 }
