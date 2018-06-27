@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Word } from './types';
+import { WordFilterComponent } from './word-filter.component';
 
 @Component({
   selector: 'app-words',
   template: `
       <h4>Words Component</h4>
       <app-word-form [shouldShowForm]="shouldShowForm"></app-word-form>
-      <app-word-filter [filterMode]="filterMode"></app-word-filter>
+      <app-word-filter></app-word-filter>
       <app-word-item *ngFor="let word of getFilteredWords()" [wordInfo]="word">
       </app-word-item>
   `
 })
 
 export class WordsComponent {
-  filterMode = 'SHOW_ALL';
+  @ViewChild(WordFilterComponent) wordFilterComponent: WordFilterComponent;
   shouldShowForm = false;
   words: Word[] = [
     { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true },
@@ -24,8 +25,8 @@ export class WordsComponent {
 
   getFilteredWords(): Word[] {
     return this.words.filter(w => {
-      if (this.filterMode === 'SHOW_ALL') return true;
-      if (this.filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
+      if (this.wordFilterComponent.filterMode === 'SHOW_ALL') return true;
+      if (this.wordFilterComponent.filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
       return !w.isMemorized;
     });
   }
