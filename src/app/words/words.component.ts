@@ -4,20 +4,17 @@ import { Word } from './types';
 @Component({
   selector: 'app-words',
   template: `
-    <h4>Words Component</h4>
-    <app-word-form [shouldShowForm]="shouldShowForm"></app-word-form>
-    <select class="form-control" style="width: 250px" [(ngModel)]="filterMode">
-      <option value="SHOW_ALL">SHOW ALL</option>
-      <option value="SHOW_MEMORIZED">SHOW MEMORIZED</option>
-      <option value="SHOW_FORGOT">SHOW FORGOT</option>
-    </select>
-    <app-word-item *ngFor="let word of getFilteredWords()" [wordInfo]="word">
-    </app-word-item>
+      <h4>Words Component</h4>
+      <app-word-form [shouldShowForm]="shouldShowForm"></app-word-form>
+      <app-word-filter [filterMode]="filterMode"></app-word-filter>
+      <app-word-item *ngFor="let word of getFilteredWords()" [wordInfo]="word">
+      </app-word-item>
   `
 })
 
 export class WordsComponent {
   filterMode = 'SHOW_ALL';
+  shouldShowForm = false;
   words: Word[] = [
     { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true },
     { _id: 'b', en: 'Two', vn: 'Hai', isMemorized: false },

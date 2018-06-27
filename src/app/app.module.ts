@@ -9,6 +9,7 @@ import { ListComponent } from './list/list.component';
 import { WordsComponent } from './words/words.component';
 import { WordItemComponent } from './words/word-item.component';
 import { WordFormComponent } from './words/word-form.component';
+import { WordFilterComponent } from './words/word-filter.component';
 
 import { ChildComponent } from './interact/child.component';
 import { ParentComponent } from './interact/parent.component';
@@ -23,7 +24,8 @@ import { ParentComponent } from './interact/parent.component';
     ChildComponent,
     ParentComponent,
     WordItemComponent,
-    WordFormComponent
+    WordFormComponent,
+    WordFilterComponent
   ],
   imports: [
     BrowserModule,
