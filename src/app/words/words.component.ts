@@ -4,20 +4,23 @@ import { Component } from '@angular/core';
   selector: 'app-words',
   template: `
     <h4>Words Component</h4>
-    <div class="word form-group" style="width: 250px">
-      <input placeholder="English" class="form-control" [(ngModel)]="txtEn" />
-      <br />
-      <input placeholder="Vietnamese" class="form-control" [(ngModel)]="txtVn" />
-      <br />
-      <div class="btn-container">
-          <button class="btn btn-success" (click)="addWord();">
-              Add word
-          </button>
-          <button class="btn btn-danger">
-              Cancel
-          </button>
+      <button class="btn btn-success" (click)="addWord();">
+        Add word
+      </button>
+      <div class="word form-group" style="width: 250px">
+        <input placeholder="English" class="form-control" [(ngModel)]="txtEn" />
+        <br />
+        <input placeholder="Vietnamese" class="form-control" [(ngModel)]="txtVn" />
+        <br />
+        <div class="btn-container">
+            <button class="btn btn-success" (click)="addWord();">
+                Add word
+            </button>
+            <button class="btn btn-danger">
+                Cancel
+            </button>
+        </div>
       </div>
-    </div>
     <select class="form-control" style="width: 250px" [(ngModel)]="filterMode">
       <option value="SHOW_ALL">SHOW ALL</option>
       <option value="SHOW_MEMORIZED">SHOW MEMORIZED</option>
@@ -47,6 +50,7 @@ export class WordsComponent {
   txtVn = '';
   txtEn = '';
   filterMode = 'SHOW_ALL';
+  shouldShowForm = false;
   words: Word[] = [
     { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true },
     { _id: 'b', en: 'Two', vn: 'Hai', isMemorized: false },
