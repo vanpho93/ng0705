@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'app-word-form',
     template: `
-     <button class="btn btn-primary" (click)="showForm();" *ngIf="!shouldShowForm" style="margin-bottom: 10px">
+     <button class="btn btn-primary" *ngIf="!shouldShowForm" style="margin-bottom: 10px">
         +
       </button>
       <div class="word form-group" style="width: 250px" *ngIf="shouldShowForm">
@@ -12,10 +12,10 @@ import { Component, Input } from '@angular/core';
         <input placeholder="Vietnamese" class="form-control" [(ngModel)]="txtVn" />
         <br />
         <div class="btn-container">
-            <button class="btn btn-success" (click)="addWord();">
+            <button class="btn btn-success">
                 Add word
             </button>
-            <button class="btn btn-danger" (click)="cancelForm();">
+            <button class="btn btn-danger">
                 Cancel
             </button>
         </div>

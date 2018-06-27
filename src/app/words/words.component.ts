@@ -17,47 +17,13 @@ import { Word } from './types';
 })
 
 export class WordsComponent {
-  txtVn = '';
-  txtEn = '';
   filterMode = 'SHOW_ALL';
-  shouldShowForm = false;
   words: Word[] = [
     { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true },
     { _id: 'b', en: 'Two', vn: 'Hai', isMemorized: false },
     { _id: 'c', en: 'Three', vn: 'Ba', isMemorized: false },
     { _id: 'd', en: 'Four', vn: 'Bon', isMemorized: true },
   ];
-
-  showForm() { this.shouldShowForm = true; }
-
-  cancelForm() {
-    this.shouldShowForm = false;
-    this.txtEn = '';
-    this.txtVn = '';
-  }
-
-  addWord() {
-    const word: Word = {
-      _id: Date.now() + '',
-      en: this.txtEn,
-      vn: this.txtVn,
-      isMemorized: false
-    };
-    this.words.unshift(word);
-    this.txtEn = '';
-    this.txtVn = '';
-    this.shouldShowForm = !this.shouldShowForm;
-  }
-
-  removeWord(_id: string) {
-    const index = this.words.findIndex(w => w._id === _id);
-    this.words.splice(index, 1);
-  }
-
-  toggleWord(_id: string) {
-    const word = this.words.find(w => w._id === _id);
-    word.isMemorized = !word.isMemorized;
-  }
 
   getFilteredWords(): Word[] {
     return this.words.filter(w => {
