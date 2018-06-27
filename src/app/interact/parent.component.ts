@@ -4,8 +4,10 @@ import { Component } from '@angular/core';
     selector: 'app-parent',
     template: `
         <h4>Parent component</h4>
-        <app-child></app-child>
+        <app-child [wordInfo]="word"></app-child>
     `
 })
 
-export class ParentComponent {}
+export class ParentComponent {
+    word = { en: 'Six', vn: 'sau' };
+}
