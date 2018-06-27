@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Word } from './types';
 
 @Component({
     selector: 'app-word-item',
@@ -24,5 +25,5 @@ import { Component } from '@angular/core';
 })
 
 export class WordItemComponent {
-    wordInfo = { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true };
+    @Input() wordInfo: Word;
 }

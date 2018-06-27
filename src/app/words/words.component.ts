@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Word } from './types';
 
 @Component({
   selector: 'app-words',
@@ -26,7 +27,8 @@ import { Component } from '@angular/core';
       <option value="SHOW_MEMORIZED">SHOW MEMORIZED</option>
       <option value="SHOW_FORGOT">SHOW FORGOT</option>
     </select>
-    <app-word-item *ngFor="let wordInfo of getFilteredWords()"></app-word-item>
+    <app-word-item *ngFor="let word of getFilteredWords()" [wordInfo]="word">
+    </app-word-item>
   `
 })
 
@@ -80,11 +82,4 @@ export class WordsComponent {
       return !w.isMemorized;
     });
   }
-}
-
-interface Word {
-  _id: string;
-  en: string;
-  vn: string;
-  isMemorized: boolean;
 }
