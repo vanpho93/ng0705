@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
   selector: 'app-words',
   template: `
     <h4>Words Component</h4>
-      <button class="btn btn-success" (click)="addWord();">
-        Add word
+      <button class="btn btn-primary" (click)="showForm();" *ngIf="!shouldShowForm" style="margin-bottom: 10px">
+        +
       </button>
-      <div class="word form-group" style="width: 250px">
+      <div class="word form-group" style="width: 250px" *ngIf="shouldShowForm">
         <input placeholder="English" class="form-control" [(ngModel)]="txtEn" />
         <br />
         <input placeholder="Vietnamese" class="form-control" [(ngModel)]="txtVn" />
@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
             <button class="btn btn-success" (click)="addWord();">
                 Add word
             </button>
-            <button class="btn btn-danger">
+            <button class="btn btn-danger" (click)="cancelForm();">
                 Cancel
             </button>
         </div>
@@ -58,6 +58,14 @@ export class WordsComponent {
     { _id: 'd', en: 'Four', vn: 'Bon', isMemorized: true },
   ];
 
+  showForm() { this.shouldShowForm = true; }
+
+  cancelForm() {
+    this.shouldShowForm = false;
+    this.txtEn = '';
+    this.txtVn = '';
+  }
+
   addWord() {
     const word: Word = {
       _id: Date.now() + '',
@@ -68,6 +76,7 @@ export class WordsComponent {
     this.words.unshift(word);
     this.txtEn = '';
     this.txtVn = '';
+    this.shouldShowForm = !this.shouldShowForm;
   }
 
   removeWord(_id: string) {
