@@ -26,23 +26,7 @@ import { Component } from '@angular/core';
       <option value="SHOW_MEMORIZED">SHOW MEMORIZED</option>
       <option value="SHOW_FORGOT">SHOW FORGOT</option>
     </select>
-    <div class="word" *ngFor="let wordInfo of getFilteredWords()">
-      <div class="word-container">
-        <h3 class="text-success">{{ wordInfo.en }}</h3>
-        <h3 class="text-danger">{{ wordInfo.isMemorized ? '******' : wordInfo.vn }}</h3>
-      </div>
-      <div class="btn-container">
-        <button class="btn btn-success" *ngIf="wordInfo.isMemorized" (click)="toggleWord(wordInfo._id)">
-          Forgot
-        </button>
-        <button class="btn btn-danger" *ngIf="!wordInfo.isMemorized" (click)="toggleWord(wordInfo._id)">
-          Memorized
-        </button>
-        <button class="btn btn-warning" (click)="removeWord(wordInfo._id);">
-          Remove
-        </button>
-      </div>
-    </div>
+    <app-word-item *ngFor="let wordInfo of getFilteredWords()"></app-word-item>
   `
 })
 

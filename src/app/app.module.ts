@@ -7,6 +7,7 @@ import { BoxComponent } from './box/box.component';
 import { WordComponent } from './word/word.component';
 import { ListComponent } from './list/list.component';
 import { WordsComponent } from './words/words.component';
+import { WordItemComponent } from './words/word-item.component';
 
 import { ChildComponent } from './interact/child.component';
 import { ParentComponent } from './interact/parent.component';
@@ -19,7 +20,8 @@ import { ParentComponent } from './interact/parent.component';
     ListComponent,
     WordsComponent,
     ChildComponent,
-    ParentComponent
+    ParentComponent,
+    WordItemComponent
   ],
   imports: [
     BrowserModule,
