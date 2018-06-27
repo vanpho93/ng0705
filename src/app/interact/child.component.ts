@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Word } from './types';
 
 @Component({
     selector: 'app-child',
@@ -10,5 +11,5 @@ import { Component, Input } from '@angular/core';
 })
 
 export class ChildComponent {
-    @Input() wordInfo;
+    @Input() wordInfo: Word;
 }

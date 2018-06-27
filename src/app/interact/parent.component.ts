@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Word } from './types';
 
 @Component({
     selector: 'app-parent',
@@ -9,5 +10,5 @@ import { Component } from '@angular/core';
 })
 
 export class ParentComponent {
-    word = { en: 'Six', vn: 'sau' };
+    word: Word = { en: 'Six', vn: 'sau' };
 }
