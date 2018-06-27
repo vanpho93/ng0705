@@ -5,23 +5,7 @@ import { Word } from './types';
   selector: 'app-words',
   template: `
     <h4>Words Component</h4>
-      <button class="btn btn-primary" (click)="showForm();" *ngIf="!shouldShowForm" style="margin-bottom: 10px">
-        +
-      </button>
-      <div class="word form-group" style="width: 250px" *ngIf="shouldShowForm">
-        <input placeholder="English" class="form-control" [(ngModel)]="txtEn" />
-        <br />
-        <input placeholder="Vietnamese" class="form-control" [(ngModel)]="txtVn" />
-        <br />
-        <div class="btn-container">
-            <button class="btn btn-success" (click)="addWord();">
-                Add word
-            </button>
-            <button class="btn btn-danger" (click)="cancelForm();">
-                Cancel
-            </button>
-        </div>
-      </div>
+    <app-word-form [shouldShowForm]="shouldShowForm"></app-word-form>
     <select class="form-control" style="width: 250px" [(ngModel)]="filterMode">
       <option value="SHOW_ALL">SHOW ALL</option>
       <option value="SHOW_MEMORIZED">SHOW MEMORIZED</option>
