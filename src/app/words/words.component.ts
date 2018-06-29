@@ -9,6 +9,7 @@ import { WordFilterComponent } from './word-filter.component';
       <app-word-form
         [shouldShowForm]="shouldShowForm"
         (onToggleForm)="onToggleForm();"
+        (onAddWord)="onAddWord($event);"
       ></app-word-form>
       <app-word-filter></app-word-filter>
       <app-word-item
@@ -49,5 +50,10 @@ export class WordsComponent {
   onToggle(_id: string) {
     const word = this.words.find(w => w._id === _id);
     word.isMemorized = !word.isMemorized;
+  }
+
+  onAddWord(word: Word) {
+    this.words.unshift(word);
+    this.shouldShowForm = false;
   }
 }
