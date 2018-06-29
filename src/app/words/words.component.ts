@@ -15,6 +15,7 @@ import { WordFilterComponent } from './word-filter.component';
         *ngFor="let word of getFilteredWords()"
         [wordInfo]="word"
         (onRemove)="onRemove($event)"
+        (onToggle)="onToggle($event)"
       >
       </app-word-item>
   `
@@ -43,5 +44,10 @@ export class WordsComponent {
   onRemove(_id: string) {
     const index = this.words.findIndex(w => w._id === _id);
     this.words.splice(index, 1);
+  }
+
+  onToggle(_id: string) {
+    const word = this.words.find(w => w._id === _id);
+    word.isMemorized = !word.isMemorized;
   }
 }

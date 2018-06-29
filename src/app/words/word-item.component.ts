@@ -10,10 +10,10 @@ import { Word } from './types';
               <h3 class="text-danger">{{ wordInfo.isMemorized ? '******' : wordInfo.vn }}</h3>
             </div>
             <div class="btn-container">
-              <button class="btn btn-success" *ngIf="wordInfo.isMemorized">
+              <button class="btn btn-success" *ngIf="wordInfo.isMemorized" (click)="onToggle.emit(wordInfo._id);">
                 Forgot
               </button>
-              <button class="btn btn-danger" *ngIf="!wordInfo.isMemorized">
+              <button class="btn btn-danger" *ngIf="!wordInfo.isMemorized" (click)="onToggle.emit(wordInfo._id);">
                 Memorized
               </button>
               <button class="btn btn-warning" (click)="onRemove.emit(wordInfo._id);">
@@ -27,4 +27,5 @@ import { Word } from './types';
 export class WordItemComponent {
     @Input() wordInfo: Word;
     @Output() onRemove = new EventEmitter();
+    @Output() onToggle = new EventEmitter();
 }
