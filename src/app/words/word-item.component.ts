@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Word } from './types';
 
 @Component({
@@ -16,7 +16,7 @@ import { Word } from './types';
               <button class="btn btn-danger" *ngIf="!wordInfo.isMemorized">
                 Memorized
               </button>
-              <button class="btn btn-warning">
+              <button class="btn btn-warning" (click)="onRemove.emit(wordInfo._id);">
                 Remove
               </button>
             </div>
@@ -26,4 +26,5 @@ import { Word } from './types';
 
 export class WordItemComponent {
     @Input() wordInfo: Word;
+    @Output() onRemove = new EventEmitter();
 }

@@ -11,7 +11,11 @@ import { WordFilterComponent } from './word-filter.component';
         (onToggleForm)="onToggleForm();"
       ></app-word-form>
       <app-word-filter></app-word-filter>
-      <app-word-item *ngFor="let word of getFilteredWords()" [wordInfo]="word">
+      <app-word-item
+        *ngFor="let word of getFilteredWords()"
+        [wordInfo]="word"
+        (onRemove)="onRemove($event)"
+      >
       </app-word-item>
   `
 })
@@ -34,5 +38,10 @@ export class WordsComponent {
       if (this.wordFilterComponent.filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
       return !w.isMemorized;
     });
+  }
+
+  onRemove(_id: string) {
+    const index = this.words.findIndex(w => w._id === _id);
+    this.words.splice(index, 1);
   }
 }
