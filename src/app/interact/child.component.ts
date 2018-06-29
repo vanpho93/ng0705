@@ -1,15 +1,19 @@
-import { Component, Input } from '@angular/core';
-import { Word } from './types';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-child',
     template: `
         <h4>Child component</h4>
-        <p>{{ wordInfo.en }}</p>
-        <p>{{ wordInfo.vn }}</p>
+        <button class="btn btn-success">
+            increase
+        </button>
+        <button class="btn btn-danger">
+            decrease
+        </button>
+        <button class="btn btn-warning">
+            reset
+        </button>
     `
 })
 
-export class ChildComponent {
-    @Input() wordInfo: Word;
-}
+export class ChildComponent {}
