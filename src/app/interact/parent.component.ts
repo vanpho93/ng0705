@@ -8,10 +8,18 @@ import { Word } from './types';
         <h1>
             Value = {{ value }}
         </h1>
-        <app-child></app-child>
+        <app-child
+            (onIncrease)="onIncrease();"
+            (onDecrease)="onDecrease();"
+            (onReset)="onReset();"
+        ></app-child>
     `
 })
 
 export class ParentComponent {
     value = 1;
+
+    onIncrease() { this.value++; }
+    onDecrease() { this.value--; }
+    onReset() { this.value = 1; }
 }
