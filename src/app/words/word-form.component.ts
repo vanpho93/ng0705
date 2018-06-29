@@ -1,11 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'app-word-form',
     template: `
-     <button class="btn btn-primary" *ngIf="!shouldShowForm" style="margin-bottom: 10px">
-        +
-      </button>
+        <button
+            class="btn btn-primary"
+            *ngIf="!shouldShowForm"
+            style="margin-bottom: 10px"
+            (click)="onToggleForm.emit();"
+        >
+            +
+        </button>
       <div class="word form-group" style="width: 250px" *ngIf="shouldShowForm">
         <input placeholder="English" class="form-control" [(ngModel)]="txtEn" />
         <br />
@@ -15,7 +20,7 @@ import { Component, Input } from '@angular/core';
             <button class="btn btn-success">
                 Add word
             </button>
-            <button class="btn btn-danger">
+            <button class="btn btn-danger" (click)="onToggleForm.emit();">
                 Cancel
             </button>
         </div>
@@ -25,6 +30,7 @@ import { Component, Input } from '@angular/core';
 
 export class WordFormComponent {
     @Input() shouldShowForm: boolean;
+    @Output() onToggleForm = new EventEmitter();
     txtVn = '';
     txtEn = '';
 }

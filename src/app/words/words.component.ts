@@ -6,7 +6,10 @@ import { WordFilterComponent } from './word-filter.component';
   selector: 'app-words',
   template: `
       <h4>Words Component</h4>
-      <app-word-form [shouldShowForm]="shouldShowForm"></app-word-form>
+      <app-word-form
+        [shouldShowForm]="shouldShowForm"
+        (onToggleForm)="onToggleForm();"
+      ></app-word-form>
       <app-word-filter></app-word-filter>
       <app-word-item *ngFor="let word of getFilteredWords()" [wordInfo]="word">
       </app-word-item>
@@ -22,6 +25,8 @@ export class WordsComponent {
     { _id: 'c', en: 'Three', vn: 'Ba', isMemorized: false },
     { _id: 'd', en: 'Four', vn: 'Bon', isMemorized: true },
   ];
+
+  onToggleForm() { this.shouldShowForm = !this.shouldShowForm; }
 
   getFilteredWords(): Word[] {
     return this.words.filter(w => {
