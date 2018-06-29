@@ -12,6 +12,7 @@ import { Word } from './types';
             (onIncrease)="onIncrease();"
             (onDecrease)="onDecrease();"
             (onReset)="onReset();"
+            (onChange)="onChange($event);"
         ></app-child>
     `
 })
@@ -22,4 +23,7 @@ export class ParentComponent {
     onIncrease() { this.value++; }
     onDecrease() { this.value--; }
     onReset() { this.value = 1; }
+    onChange(isIncrease: boolean) {
+        isIncrease ? this.value++ : this.value--;
+    }
 }
