@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Word } from './types';
 import { WordFilterComponent } from './word-filter.component';
 
@@ -25,13 +26,11 @@ import { WordFilterComponent } from './word-filter.component';
 export class WordsComponent {
   @ViewChild(WordFilterComponent) wordFilterComponent: WordFilterComponent;
   shouldShowForm = false;
-  words: Word[] = [
-    { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true },
-    { _id: 'b', en: 'Two', vn: 'Hai', isMemorized: false },
-    { _id: 'c', en: 'Three', vn: 'Ba', isMemorized: false },
-    { _id: 'd', en: 'Four', vn: 'Bon', isMemorized: true },
-  ];
+  words: Word[];
 
+  constructor(private store: Store<any>) {
+    this.store.select('words').subscribe(newWords => this.words = newWords);
+  }
   onToggleForm() { this.shouldShowForm = !this.shouldShowForm; }
 
   getFilteredWords(): Word[] {

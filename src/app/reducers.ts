@@ -16,7 +16,7 @@ export function shouldShowFormReducer(state = false, action): boolean {
 }
 
 const defaultWords = [
-    { _id: 'a', en: 'One', vn: 'Mot', isMemorized: true },
+    { _id: 'a', en: 'Ten', vn: 'Mot', isMemorized: true },
     { _id: 'b', en: 'Two', vn: 'Hai', isMemorized: false },
     { _id: 'c', en: 'Three', vn: 'Ba', isMemorized: false },
     { _id: 'd', en: 'Four', vn: 'Bon', isMemorized: true },
