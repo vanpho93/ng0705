@@ -24,19 +24,22 @@ import { WordFilterComponent } from './word-filter.component';
 })
 
 export class WordsComponent {
-  @ViewChild(WordFilterComponent) wordFilterComponent: WordFilterComponent;
-  shouldShowForm = false;
+  filterMode: string;
+  shouldShowForm: boolean;
   words: Word[];
 
   constructor(private store: Store<any>) {
     this.store.select('words').subscribe(newWords => this.words = newWords);
+    this.store.select('shouldShowForm').subscribe(s => this.shouldShowForm = s);
+    this.store.select('filterMode').subscribe(f => this.filterMode = f);
   }
+
   onToggleForm() { this.shouldShowForm = !this.shouldShowForm; }
 
   getFilteredWords(): Word[] {
     return this.words.filter(w => {
-      if (this.wordFilterComponent.filterMode === 'SHOW_ALL') return true;
-      if (this.wordFilterComponent.filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
+      if (this.filterMode === 'SHOW_ALL') return true;
+      if (this.filterMode === 'SHOW_MEMORIZED') return w.isMemorized;
       return !w.isMemorized;
     });
   }
