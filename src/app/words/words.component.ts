@@ -7,7 +7,6 @@ import { Word } from './types';
   template: `
       <h4>Words Component</h4>
       <app-word-form
-        [shouldShowForm]="shouldShowForm"
         (onToggleForm)="onToggleForm();"
         (onAddWord)="onAddWord($event);"
       ></app-word-form>
@@ -24,12 +23,10 @@ import { Word } from './types';
 
 export class WordsComponent {
   filterMode: string;
-  shouldShowForm: boolean;
   words: Word[];
 
   constructor(private store: Store<any>) {
     this.store.select('words').subscribe(newWords => this.words = newWords);
-    this.store.select('shouldShowForm').subscribe(s => this.shouldShowForm = s);
     this.store.select('filterMode').subscribe(f => this.filterMode = f);
   }
 

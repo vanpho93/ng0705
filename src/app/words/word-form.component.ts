@@ -1,4 +1,5 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Word } from './types';
 
 @Component({
@@ -8,7 +9,7 @@ import { Word } from './types';
             class="btn btn-primary"
             *ngIf="!shouldShowForm"
             style="margin-bottom: 10px"
-            (click)="onToggleForm.emit();"
+            (click)="toggleForm();"
         >
             +
         </button>
@@ -21,7 +22,7 @@ import { Word } from './types';
             <button class="btn btn-success" (click)="addWord();">
                 Add word
             </button>
-            <button class="btn btn-danger" (click)="onToggleForm.emit();">
+            <button class="btn btn-danger" (click)="toggleForm();">
                 Cancel
             </button>
         </div>
@@ -30,21 +31,25 @@ import { Word } from './types';
 })
 
 export class WordFormComponent {
-    @Input() shouldShowForm: boolean;
-    @Output() onToggleForm = new EventEmitter();
-    @Output() onAddWord = new EventEmitter();
+    shouldShowForm: boolean;
     txtVn = '';
     txtEn = '';
-
+    constructor(private store: Store<any>) {
+        this.store.select('shouldShowForm').subscribe(s => this.shouldShowForm = s);
+    }
     addWord() {
-        const word: Word = {
-            _id: Date.now() + '',
-            en: this.txtEn,
-            vn: this.txtVn,
-            isMemorized: false
-        };
-        this.onAddWord.emit(word);
-        this.txtEn = '';
-        this.txtVn = '';
+        // const word: Word = {
+        //     _id: Date.now() + '',
+        //     en: this.txtEn,
+        //     vn: this.txtVn,
+        //     isMemorized: false
+        // };
+        // this.onAddWord.emit(word);
+        // this.txtEn = '';
+        // this.txtVn = '';
+    }
+
+    toggleForm() {
+        this.store.dispatch({ type: 'TOGGLE_FORM' });
     }
 }

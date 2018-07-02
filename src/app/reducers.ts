@@ -13,6 +13,7 @@ export function filterModeReducer(state = 'SHOW_FORGOT', action): string {
 }
 
 export function shouldShowFormReducer(state = false, action): boolean {
+    if (action.type === 'TOGGLE_FORM') return !state;
     return state;
 }
 
