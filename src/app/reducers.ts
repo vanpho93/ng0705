@@ -8,6 +8,7 @@ export function valueReducer(state = 1, action) {
 }
 
 export function filterModeReducer(state = 'SHOW_FORGOT', action): string {
+    if (action.type === 'SET_FILTER_MODE') return action.filterMode;
     return state;
 }
 
