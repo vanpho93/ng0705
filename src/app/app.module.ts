@@ -15,7 +15,7 @@ import { WordFilterComponent } from './words/word-filter.component';
 import { ChildComponent } from './interact/child.component';
 import { ParentComponent } from './interact/parent.component';
 
-import { valueReducer } from './reducers';
+import { valueReducer, wordsReducer, shouldShowFormReducer, filterModeReducer } from './reducers';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,12 @@ import { valueReducer } from './reducers';
   imports: [
     BrowserModule,
     FormsModule,
-    StoreModule.forRoot({ value: valueReducer })
+    StoreModule.forRoot({
+      value: valueReducer,
+      words: wordsReducer,
+      filterMode: filterModeReducer,
+      shouldShowForm: shouldShowFormReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
