@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { BoxComponent } from './box/box.component';
@@ -13,6 +14,8 @@ import { WordFilterComponent } from './words/word-filter.component';
 
 import { ChildComponent } from './interact/child.component';
 import { ParentComponent } from './interact/parent.component';
+
+import { valueReducer } from './reducers';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { ParentComponent } from './interact/parent.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({ value: valueReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

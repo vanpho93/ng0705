@@ -1,24 +1,34 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-child',
     template: `
         <h4>Child component</h4>
-        <button class="btn btn-success" (click)="onChange.emit(true);">
+        <button class="btn btn-success" (click)="increase();">
             increase
         </button>
-        <button class="btn btn-danger" (click)="onChange.emit(false);">
+        <button class="btn btn-danger" (click)="decrease(false);">
             decrease
         </button>
-        <button class="btn btn-warning" (click)="onReset.emit();">
+        <button class="btn btn-warning" (click)="reset();">
             reset
         </button>
     `
 })
 
 export class ChildComponent {
-    @Output() onIncrease = new EventEmitter();
-    @Output() onDecrease = new EventEmitter();
-    @Output() onReset = new EventEmitter();
-    @Output() onChange = new EventEmitter();
+    constructor(private store: Store<any>) { }
+
+    increase() {
+        this.store.dispatch({ type: 'INCREASE' });
+    }
+
+    decrease() {
+        this.store.dispatch({ type: 'DECREASE' });
+    }
+
+    reset() {
+        this.store.dispatch({ type: 'RESET' });
+    }
 }
