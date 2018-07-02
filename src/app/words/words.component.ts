@@ -1,7 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Word } from './types';
-import { WordFilterComponent } from './word-filter.component';
 
 @Component({
   selector: 'app-words',

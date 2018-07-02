@@ -7,7 +7,7 @@ export function valueReducer(state = 1, action) {
     return state;
 }
 
-export function filterModeReducer(state = 'SHOW_ALL', action): string {
+export function filterModeReducer(state = 'SHOW_FORGOT', action): string {
     return state;
 }
 
