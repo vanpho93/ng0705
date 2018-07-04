@@ -33,5 +33,7 @@ export class WordItemComponent {
     this.store.dispatch({ type: 'REMOVE_WORD', _id: this.wordInfo._id });
   }
 
-  toggle() {}
+  toggle() {
+    this.store.dispatch({ type: 'TOGGLE_WORD', _id: this.wordInfo._id });
+  }
 }
