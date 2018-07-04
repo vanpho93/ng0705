@@ -4,11 +4,12 @@ import { Component } from '@angular/core';
   selector: 'app-weather',
   template: `
       <div style="margin-top: 20px; text-align: center;">
-            <h4>Enter your city name</h4>
+            <h4>{{ message }}</h4>
             <br>
             <input
                 class="form-control"
                 placeholder="Enter your city name"
+                [(ngModel)]="txtCityName"
                 (keyUp.enter)="getWeather();"
             />
             <br />
@@ -21,5 +22,23 @@ import { Component } from '@angular/core';
 
 export class WeatherComponent {
     txtCityName = '';
-    getWeather() {}
+    cityName: string = null;
+    temp: number = null;
+    loading = false;
+
+    getWeather() {
+        this.loading = true;
+        setTimeout(() => {
+            this.loading = false;
+            this.cityName = this.txtCityName;
+            this.temp = 30;
+            this.txtCityName = '';
+        }, 500);
+    }
+
+    get message(): string {
+        if (this.loading) return 'Loading...';
+        if (this.cityName) return `${this.cityName} is now ${this.temp}oC`;
+        return 'Enter your city name';
+    }
 }
