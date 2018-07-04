@@ -27,7 +27,12 @@ export class WeatherComponent {
     loading = false;
 
     getWeather() {
+        if (this.txtCityName.length < 2) {
+            return alert('Please enter a valid name');
+        }
         this.loading = true;
+        this.cityName = null;
+        this.temp = null;
         setTimeout(() => {
             this.loading = false;
             this.cityName = this.txtCityName;
