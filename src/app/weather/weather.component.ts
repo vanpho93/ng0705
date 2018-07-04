@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-weather',
@@ -26,6 +27,8 @@ export class WeatherComponent {
     temp: number = null;
     loading = false;
 
+    constructor(private http: Http) {}
+
     getWeather() {
         if (this.txtCityName.length < 2) {
             return alert('Please enter a valid name');
@@ -33,12 +36,16 @@ export class WeatherComponent {
         this.loading = true;
         this.cityName = null;
         this.temp = null;
-        setTimeout(() => {
+        const url = 'http://api.openweathermap.org/data/2.5/weather?appid=01cc37655736835b0b75f2b395737694&units=metric&q=';
+        this.http.get(url + this.txtCityName)
+        .toPromise()
+        .then(res => res.json())
+        .then(resJson => {
             this.loading = false;
             this.cityName = this.txtCityName;
-            this.temp = 30;
+            this.temp = resJson.main.temp;
             this.txtCityName = '';
-        }, 500);
+        });
     }
 
     get message(): string {
@@ -47,3 +54,5 @@ export class WeatherComponent {
         return 'Enter your city name';
     }
 }
+
+// http://api.openweathermap.org/data/2.5/weather?appid=01cc37655736835b0b75f2b395737694&units=metric&q=
