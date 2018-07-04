@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
+import { WeatherService } from '../services/weather.service';
 
 @Component({
   selector: 'app-weather',
@@ -18,7 +18,8 @@ import { Http } from '@angular/http';
                 Get Weather
             </button>
       </div>
-  `
+  `,
+  providers: [WeatherService]
 })
 
 export class WeatherComponent {
@@ -27,25 +28,27 @@ export class WeatherComponent {
     temp: number = null;
     loading = false;
 
-    constructor(private http: Http) {}
+    constructor(private weatherService: WeatherService) {}
 
-    getWeather() {
+    async getWeather() {
         if (this.txtCityName.length < 2) {
             return alert('Please enter a valid name');
         }
         this.loading = true;
         this.cityName = null;
         this.temp = null;
-        const url = 'http://api.openweathermap.org/data/2.5/weather?appid=01cc37655736835b0b75f2b395737694&units=metric&q=';
-        this.http.get(url + this.txtCityName)
-        .toPromise()
-        .then(res => res.json())
-        .then(resJson => {
+        try {
+            this.temp = await this.weatherService.getTemp(this.txtCityName);
             this.loading = false;
             this.cityName = this.txtCityName;
-            this.temp = resJson.main.temp;
             this.txtCityName = '';
-        });
+        } catch (error) {
+            alert('Cannot find city ' + this.txtCityName);
+            this.loading = false;
+            this.cityName = null;
+            this.temp = null;
+            this.txtCityName = '';
+        }
     }
 
     get message(): string {
