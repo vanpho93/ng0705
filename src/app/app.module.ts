@@ -8,6 +8,7 @@ import { BoxComponent } from './box/box.component';
 import { WordComponent } from './word/word.component';
 import { ListComponent } from './list/list.component';
 import { WordsComponent } from './words/words.component';
+import { WeatherComponent } from './weather/weather.component';
 import { WordItemComponent } from './words/word-item.component';
 import { WordFormComponent } from './words/word-form.component';
 import { WordFilterComponent } from './words/word-filter.component';
@@ -28,7 +29,8 @@ import { valueReducer, wordsReducer, shouldShowFormReducer, filterModeReducer } 
     ParentComponent,
     WordItemComponent,
     WordFormComponent,
-    WordFilterComponent
+    WordFilterComponent,
+    WeatherComponent
   ],
   imports: [
     BrowserModule,
