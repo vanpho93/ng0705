@@ -38,15 +38,15 @@ export class WordFormComponent {
         this.store.select('shouldShowForm').subscribe(s => this.shouldShowForm = s);
     }
     addWord() {
-        // const word: Word = {
-        //     _id: Date.now() + '',
-        //     en: this.txtEn,
-        //     vn: this.txtVn,
-        //     isMemorized: false
-        // };
-        // this.onAddWord.emit(word);
-        // this.txtEn = '';
-        // this.txtVn = '';
+        const word: Word = {
+            _id: Date.now() + '',
+            en: this.txtEn,
+            vn: this.txtVn,
+            isMemorized: false
+        };
+        this.store.dispatch({ type: 'ADD_WORD', word });
+        this.txtEn = '';
+        this.txtVn = '';
     }
 
     toggleForm() {

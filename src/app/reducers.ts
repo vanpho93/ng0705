@@ -7,13 +7,14 @@ export function valueReducer(state = 1, action) {
     return state;
 }
 
-export function filterModeReducer(state = 'SHOW_FORGOT', action): string {
+export function filterModeReducer(state = 'SHOW_ALL', action): string {
     if (action.type === 'SET_FILTER_MODE') return action.filterMode;
     return state;
 }
 
 export function shouldShowFormReducer(state = false, action): boolean {
     if (action.type === 'TOGGLE_FORM') return !state;
+    if (action.type === 'ADD_WORD') return false;
     return state;
 }
 
@@ -25,6 +26,10 @@ const defaultWords = [
 ];
 
 export function wordsReducer(state: Word[] = defaultWords, action): Word[] {
+    if (action.type === 'ADD_WORD') return state.concat(action.word);
+    if (action.type === 'REMOVE_WORD') {
+        return state.filter(word => word._id !== action._id);
+    }
     return state;
 }
 
