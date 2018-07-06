@@ -22,7 +22,6 @@ export class WordService {
         if (!resJson.success) return alert(resJson.message);
         this.store.dispatch({ type: 'REMOVE_WORD', _id });
 
-        // this.http.post(url, { en: '', vn: ''}).toPromise();
         // this.http.put(url, { isMemorized: false }).toPromise();
     }
 
@@ -32,5 +31,13 @@ export class WordService {
         const resJson = await res.json();
         if (!resJson.success) return alert(resJson.message);
         this.store.dispatch({ type: 'ADD_WORD', word: resJson.word });
+    }
+
+    async toggleWord(_id: string, isMemorized: boolean) {
+        const url = 'http://localhost:3000/word/' + _id;
+        const res = await this.http.put(url, { isMemorized }).toPromise();
+        const resJson = await res.json();
+        if (!resJson.success) return alert(resJson.message);
+        this.store.dispatch({ type: 'TOGGLE_WORD', _id });
     }
 }

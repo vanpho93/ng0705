@@ -36,6 +36,6 @@ export class WordItemComponent {
   }
 
   toggle() {
-    this.store.dispatch({ type: 'TOGGLE_WORD', _id: this.wordInfo._id });
+    this.wordService.toggleWord(this.wordInfo._id, !this.wordInfo.isMemorized);
   }
 }
