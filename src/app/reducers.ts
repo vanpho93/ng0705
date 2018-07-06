@@ -18,7 +18,6 @@ export function shouldShowFormReducer(state = false, action): boolean {
     return state;
 }
 
-
 export function wordsReducer(state: Word[] = [], action): Word[] {
     if (action.type === 'SET_WORDS') return action.words;
     if (action.type === 'ADD_WORD') return [...state, action.word];
