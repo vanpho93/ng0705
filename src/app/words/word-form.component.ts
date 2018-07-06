@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Word } from './types';
+import { WordService } from '../services/word.service';
 
 @Component({
     selector: 'app-word-form',
@@ -27,24 +28,19 @@ import { Word } from './types';
             </button>
         </div>
       </div>
-    `
+    `,
+    providers: [WordService]
 })
 
 export class WordFormComponent {
     shouldShowForm: boolean;
     txtVn = '';
     txtEn = '';
-    constructor(private store: Store<any>) {
+    constructor(private store: Store<any>, private wordService: WordService) {
         this.store.select('shouldShowForm').subscribe(s => this.shouldShowForm = s);
     }
     addWord() {
-        const word: Word = {
-            _id: Date.now() + '',
-            en: this.txtEn,
-            vn: this.txtVn,
-            isMemorized: false
-        };
-        this.store.dispatch({ type: 'ADD_WORD', word });
+        this.wordService.addWord(this.txtEn, this.txtVn);
         this.txtEn = '';
         this.txtVn = '';
     }

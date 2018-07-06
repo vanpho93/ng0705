@@ -21,5 +21,16 @@ export class WordService {
         const resJson = await res.json();
         if (!resJson.success) return alert(resJson.message);
         this.store.dispatch({ type: 'REMOVE_WORD', _id });
+
+        // this.http.post(url, { en: '', vn: ''}).toPromise();
+        // this.http.put(url, { isMemorized: false }).toPromise();
+    }
+
+    async addWord(en: string, vn: string) {
+        const url = 'http://localhost:3000/word';
+        const res = await this.http.post(url, { en, vn }).toPromise();
+        const resJson = await res.json();
+        if (!resJson.success) return alert(resJson.message);
+        this.store.dispatch({ type: 'ADD_WORD', word: resJson.word });
     }
 }
