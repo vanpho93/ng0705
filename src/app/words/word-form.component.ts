@@ -28,8 +28,7 @@ import { WordService } from '../services/word.service';
             </button>
         </div>
       </div>
-    `,
-    providers: [WordService]
+    `
 })
 
 export class WordFormComponent {

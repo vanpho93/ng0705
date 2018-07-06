@@ -18,6 +18,7 @@ import { ChildComponent } from './interact/child.component';
 import { ParentComponent } from './interact/parent.component';
 
 import { valueReducer, wordsReducer, shouldShowFormReducer, filterModeReducer } from './reducers';
+import { WordService } from './services/word.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { valueReducer, wordsReducer, shouldShowFormReducer, filterModeReducer } 
       shouldShowForm: shouldShowFormReducer
     })
   ],
-  providers: [],
+  providers: [WordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

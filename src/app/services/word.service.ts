@@ -21,8 +21,6 @@ export class WordService {
         const resJson = await res.json();
         if (!resJson.success) return alert(resJson.message);
         this.store.dispatch({ type: 'REMOVE_WORD', _id });
-
-        // this.http.put(url, { isMemorized: false }).toPromise();
     }
 
     async addWord(en: string, vn: string) {
