@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 @Component({
     selector: 'app-sign-up',
     template: `
-    <form style="margin-top: 10px;" [formGroup]="formSignUp">
+    <form style="margin-top: 10px;" [formGroup]="formSignUp" (ngSubmit)="signUp();">
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
           <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
@@ -24,4 +24,8 @@ export class SignUpComponent {
         email: new FormControl(),
         password: new FormControl()
     });
+
+    signUp() {
+        alert(JSON.stringify(this.formSignUp.value));
+    }
 }
