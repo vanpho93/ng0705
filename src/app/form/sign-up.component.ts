@@ -9,15 +9,20 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
           <label for="exampleInputEmail1">Email address</label>
           <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
         </div>
+        <i class="text-danger" style="margin-bottom: 10px; display: block;" *ngIf="formSignUp.get('email').invalid">
+            Email khong hop le
+        </i>
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" placeholder="Password" formControlName="password">
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="formSignUp.invalid">Sign Up</button>
+        <i class="text-danger" style="margin-bottom: 10px; display: block;" *ngIf="formSignUp.get('password').invalid">
+            Password khong hop le
+        </i>
+        <button type="submit" class="btn btn-primary" [disabled]="formSignUp.invalid">
+            Sign Up
+        </button>
     </form>
-    <pre>{{ formSignUp.value | json }}</pre>
-    <pre>{{ formSignUp.get('email').errors | json }}</pre>
-    <pre>{{ formSignUp.get('password').errors | json }}</pre>
     `
 })
 
