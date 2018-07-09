@@ -70,7 +70,8 @@ export class SignUpComponent {
 
     get shouldShowRePasswordError() {
         const rePasswordControl = this.formSignUp.get('repassword');
-        if (rePasswordControl.touched && this.formSignUp.errors && this.formSignUp.errors.passwordsMustEqual) return true;
+        const { errors } = this.formSignUp;
+        if (rePasswordControl.touched && errors && errors.passwordsMustEqual) return true;
         return false;
     }
 }
