@@ -19,11 +19,15 @@ import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/f
         <i *ngIf="shouldShowPasswordError">
             *Password khong hop le
         </i>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Re-enter Password</label>
+          <input type="password" class="form-control" placeholder="Password" formControlName="repassword">
+        </div>
         <button type="submit" class="btn btn-primary" [disabled]="formSignUp.invalid">
             Sign Up
         </button>
     </form>
-    <pre>{{ formSignUp.get('email').errors | json }}</pre>
+    <pre>{{ formSignUp.errors | json }}</pre>
     `,
     styles: [`
         i { color: red; display: block; margin-bottom: 10px; }
@@ -34,8 +38,9 @@ import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/f
 export class SignUpComponent {
     formSignUp = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email, gmail]),
-        password: new FormControl('', [Validators.required, Validators.minLength(4)])
-    });
+        password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+        repassword: new FormControl('')
+    }, passwordsMustEqual);
 
     signUp() {
         alert(JSON.stringify(this.formSignUp.value));
@@ -67,10 +72,17 @@ function gmail(control: FormControl): ValidationErrors | null {
     return { gmail: true };
 }
 
-function myEmail(provider: string) {
-    return function (control: FormControl): ValidationErrors | null {
-        const value: string = control.value;
-        if (value.endsWith(`@${provider}.com`)) return null;
-        return { myEmail: true };
-    };
+function passwordsMustEqual(form: FormGroup): ValidationErrors | null {
+    const passwordControl = form.get('password');
+    const rePasswordControl = form.get('repassword');
+    if (passwordControl.value === rePasswordControl.value) return null;
+    return { passwordsMustEqual: true };
 }
+
+// function myEmail(provider: string) {
+//     return function (control: FormControl): ValidationErrors | null {
+//         const value: string = control.value;
+//         if (value.endsWith(`@${provider}.com`)) return null;
+//         return { myEmail: true };
+//     };
+// }
