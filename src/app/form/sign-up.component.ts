@@ -23,6 +23,9 @@ import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/f
           <label for="exampleInputPassword1">Re-enter Password</label>
           <input type="password" class="form-control" placeholder="Password" formControlName="repassword">
         </div>
+        <i *ngIf="shouldShowRePasswordError">
+            *Passwords must equal
+        </i>
         <button type="submit" class="btn btn-primary" [disabled]="formSignUp.invalid">
             Sign Up
         </button>
@@ -63,6 +66,12 @@ export class SignUpComponent {
     get shouldShowPasswordError(): boolean {
         const passwordControl = this.formSignUp.get('password');
         return passwordControl.invalid && passwordControl.touched;
+    }
+
+    get shouldShowRePasswordError() {
+        const rePasswordControl = this.formSignUp.get('repassword');
+        if (rePasswordControl.touched && this.formSignUp.errors && this.formSignUp.errors.passwordsMustEqual) return true;
+        return false;
     }
 }
 
