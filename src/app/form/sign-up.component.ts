@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 
 @Component({
     selector: 'app-sign-up',
@@ -10,28 +10,30 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
           <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
         </div>
         <i *ngIf="shouldShowEmailError">
-            *Email khong hop le
+            *{{ emailErrorMessage }}
         </i>
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" placeholder="Password" formControlName="password">
         </div>
-        <i *ngIf="formSignUp.get('password').invalid && formSignUp.get('password').touched">
+        <i *ngIf="shouldShowPasswordError">
             *Password khong hop le
         </i>
         <button type="submit" class="btn btn-primary" [disabled]="formSignUp.invalid">
             Sign Up
         </button>
     </form>
+    <pre>{{ formSignUp.get('email').errors | json }}</pre>
     `,
     styles: [`
         i { color: red; display: block; margin-bottom: 10px; }
+        input.ng-invalid.ng-touched { border-color: red; }
     `]
 })
 
 export class SignUpComponent {
     formSignUp = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
+        email: new FormControl('', [Validators.required, Validators.email, gmail]),
         password: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
 
@@ -43,4 +45,32 @@ export class SignUpComponent {
         const emailControl = this.formSignUp.get('email');
         return emailControl.invalid && emailControl.touched;
     }
+
+    get emailErrorMessage(): string {
+        const { errors } = this.formSignUp.get('email');
+        if (!errors) return null;
+        if (errors.required) return 'Email is required.';
+        if (errors.email) return 'Email is invalid.';
+        if (errors.gmail) return 'Email must be gmail.';
+        return 'Email is invalid.';
+    }
+
+    get shouldShowPasswordError(): boolean {
+        const passwordControl = this.formSignUp.get('password');
+        return passwordControl.invalid && passwordControl.touched;
+    }
+}
+
+function gmail(control: FormControl): ValidationErrors | null {
+    const value: string = control.value;
+    if (value.endsWith('@gmail.com')) return null;
+    return { gmail: true };
+}
+
+function myEmail(provider: string) {
+    return function (control: FormControl): ValidationErrors | null {
+        const value: string = control.value;
+        if (value.endsWith(`@${provider}.com`)) return null;
+        return { myEmail: true };
+    };
 }
