@@ -16,6 +16,7 @@ import { WordFilterComponent } from './words/word-filter.component';
 
 import { ChildComponent } from './interact/child.component';
 import { ParentComponent } from './interact/parent.component';
+import { SignUpComponent } from './form/sign-up.component';
 
 import { valueReducer, wordsReducer, shouldShowFormReducer, filterModeReducer } from './reducers';
 import { WordService } from './services/word.service';
@@ -32,7 +33,8 @@ import { WordService } from './services/word.service';
     WordItemComponent,
     WordFormComponent,
     WordFilterComponent,
-    WeatherComponent
+    WeatherComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
